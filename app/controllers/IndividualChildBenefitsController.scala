@@ -54,7 +54,7 @@ class IndividualChildBenefitsController @Inject() (
   }
 
   final def create(utr: SaUtr, taxYear: TaxYear): Action[JsValue] =
-    (cc.actionBuilder andThen validateAcceptHeader("2.0")).async(parse.json) { request =>
+    (cc.actionBuilder andThen validateAcceptHeader("2.0", "2.1")).async(parse.json) { request =>
       given Request[JsValue] = request
       withJsonBody[CreateSummaryRequest] { (createSummaryRequest: CreateSummaryRequest) =>
         val scenario = createSummaryRequest.scenario.getOrElse("HAPPY_PATH_1")
